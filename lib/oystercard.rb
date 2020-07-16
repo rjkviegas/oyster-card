@@ -4,7 +4,7 @@ class OysterCard
   attr_reader :balance, :journey_history, :current_journey
 
   CARD_LIMIT = 90
-  MINIMUM_AMOUNT = 1
+  MINIMUM_BALANCE = Journey::MINIMUM_FARE
 
   def initialize
     @balance = 0
@@ -20,7 +20,7 @@ class OysterCard
 
   def touch_in(entry_station)
     deduct(@current_journey.fare) if in_journey? == true
-    raise "Insufficient balance" if @balance < MINIMUM_AMOUNT
+    raise "Insufficient balance" if @balance < MINIMUM_BALANCE
 
     @current_journey = Journey.new(entry_station)
   end

@@ -22,7 +22,7 @@ describe OysterCard do
     end
 
     it 'prevents top up if limit exceeded' do
-      subject.top_up(OysterCard::MINIMUM_AMOUNT)
+      subject.top_up(OysterCard::MINIMUM_BALANCE)
       expect { subject.top_up(OysterCard::CARD_LIMIT)}.to raise_error("card limit: #{OysterCard::CARD_LIMIT} reached")
     end
   end
@@ -64,7 +64,7 @@ describe OysterCard do
     it 'check charge is made on touch out' do
       subject.top_up(OysterCard::CARD_LIMIT)
       subject.touch_in(entry_station)
-      expect { subject.touch_out(exit_station) }.to change{ subject.balance }.by(-OysterCard::MINIMUM_AMOUNT)
+      expect { subject.touch_out(exit_station) }.to change{ subject.balance }.by(-OysterCard::MINIMUM_BALANCE)
     end
 
     it 'touch out without touching in' do
