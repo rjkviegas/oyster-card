@@ -18,7 +18,7 @@ describe OysterCard do
 
   describe '#top_up(amount)' do
     it 'top up card with amount' do
-      expect(subject.top_up(OysterCard::CARD_LIMIT)).to eq("topped up #{OysterCard::CARD_LIMIT}")
+      expect(subject.top_up(OysterCard::CARD_LIMIT)).to eq(OysterCard::CARD_LIMIT)
     end
 
     it 'prevents top up if limit exceeded' do

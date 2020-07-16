@@ -22,13 +22,13 @@ let(:exit_station) { double(:exit_station) }
   describe '#journey_complete?' do
     it 'is the journey complete, returns false' do
       journey = Journey.new(entry_station)
-      expect(journey.journey_complete?).to be false
+      expect(journey.complete?).to be false
     end
 
     it 'is the journey complete, returns true' do
       journey = Journey.new(entry_station)
       journey.end_journey(exit_station)
-      expect(journey.journey_complete?).to be true
+      expect(journey.complete?).to be true
     end
   end
 

@@ -13,15 +13,12 @@ class OysterCard
 
   def top_up(amount)
     raise "card limit: #{CARD_LIMIT} reached" if amount + @balance > CARD_LIMIT
-
     @balance += amount
-    "topped up #{amount}"
   end
 
   def touch_in(entry_station)
     deduct(@current_journey.fare) if in_journey? == true
     raise "Insufficient balance" if @balance < MINIMUM_BALANCE
-
     @current_journey = Journey.new(entry_station)
   end
 
@@ -42,6 +39,7 @@ class OysterCard
   end
 
   private
+  
   def deduct(amount)
     @balance -= amount
   end
