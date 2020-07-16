@@ -30,7 +30,8 @@ describe OysterCard do
   describe '#touch_in' do
     it 'allows a card to register the start of a journey' do
       subject.top_up(OysterCard::CARD_LIMIT)
-      expect(subject.touch_in(entry_station)).to eq("Touch-in successful")
+      subject.touch_in(entry_station)
+      expect(subject.in_journey?).to be true
     end
 
     it 'throws error if card with insufficient balance is touched in' do
@@ -56,7 +57,8 @@ describe OysterCard do
     it 'allows a card to register the end of a journey' do
       subject.top_up(OysterCard::CARD_LIMIT)
       subject.touch_in(entry_station)
-      expect(subject.touch_out(exit_station)).to eq("Touch-out successful")
+      subject.touch_out(exit_station)
+      expect(subject.in_journey?).to be false
     end
 
     it 'check charge is made on touch out' do
