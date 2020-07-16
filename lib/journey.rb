@@ -13,7 +13,8 @@ class Journey
   end
 
   def journey_complete?
-    @exit_station != nil ? true : false
+    #@exit_station != nil ? true : false
+    !!@exit_station
   end
 
   def fare
