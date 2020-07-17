@@ -6,9 +6,11 @@ class OysterCard
   CARD_LIMIT = 90
   MINIMUM_BALANCE = Journey::MINIMUM_FARE
 
-  def initialize
+  def initialize(journeylog_class = Journey)
+    @journeylog_class = journeylog_class
     @balance = 0
-    @journey_history = []
+    @journey_history = [] 
+    
   end
 
   def top_up(amount)
@@ -19,11 +21,11 @@ class OysterCard
   def touch_in(entry_station)
     deduct(@current_journey.fare) if in_journey? == true
     raise "Insufficient balance" if @balance < MINIMUM_BALANCE
-    @current_journey = Journey.new(entry_station)
+    @current_journey = @journeylog_class.new(entry_station)
   end
 
   def touch_out(exit_station)
-    @current_journey = Journey.new() if in_journey? == false
+    @current_journey = @journeylog_class.new() if in_journey? == false
     @current_journey.end_journey(exit_station)
     deduct(@current_journey.fare)
     save_history
@@ -39,7 +41,7 @@ class OysterCard
   end
 
   private
-  
+
   def deduct(amount)
     @balance -= amount
   end

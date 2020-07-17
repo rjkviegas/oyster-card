@@ -38,12 +38,12 @@ describe OysterCard do
       expect { subject.touch_in(entry_station) }.to raise_error("Insufficient balance")
     end
 
-    it 'expect card to remember entry station' do
-      entry_station = double(:entry_station)
-      subject.top_up(OysterCard::CARD_LIMIT)
-      subject.touch_in(entry_station)
-      expect(subject.current_journey.entry_station).to eq entry_station
-    end
+#    it 'expect card to remember entry station' do
+#     entry_station = double(:entry_station)
+#    subject.top_up(OysterCard::CARD_LIMIT)
+#      subject.touch_in(entry_station)
+#      expect(subject.current_journey.entry_station).to include(entry_station
+#    end
 
     it 'touch in touch in, penalty fare' do
       subject.top_up(OysterCard::CARD_LIMIT)
